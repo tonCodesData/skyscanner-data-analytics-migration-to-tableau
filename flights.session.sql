@@ -1,21 +1,20 @@
 DROP TABLE flights;
 
 CREATE TABLE flights (
-    id SERIAL PRIMARY KEY,
     "Year" INT,
     "Month" INT,
     "DayofMonth" INT,
     "DayOfWeek" INT,
-    "DepTime" FLOAT,
-    "CRSDepTime" INT,
-    "ArrTime" FLOAT,
-    "CRSArrTime" INT,
+    "DepTime" TIME,
+    "CRSDepTime" TIME,
+    "ArrTime" TIME,
+    "CRSArrTime" TIME,
     "UniqueCarrier" VARCHAR(255),
     "FlightNum" INT,
-    "ActualElapsedTime" FLOAT,
+    "ActualElapsedTime" INT,
     "CRSElapsedTime" INT,
-    "ArrDelay" FLOAT,
-    "DepDelay" FLOAT,
+    "ArrDelay" INT,
+    "DepDelay" INT,
     "Origin" VARCHAR(255),
     "Dest" VARCHAR(255),
     "Distance" FLOAT,
@@ -23,23 +22,28 @@ CREATE TABLE flights (
     "Diverted" INT
 );
 
-ALTER TABLE flights
-ALTER COLUMN DayOfWeek TYPE numeric; -- or real or double precision, depending on your needs
 
+COPY flights FROM 'G:\project_dir\migration-to-tablueau\data-analytics-migration-to-tableau\flights_final.csv' WITH DELIMITER ',' CSV HEADER;
 
-COPY flights(CRSDepTime)
-FROM 'G:\\project_dir\\changed_flights.csv' WITH DELIMITER ',' CSV;
+SELECT * FROM flights LIMIT 100;
 
-UPDATE flights
-SET CRSDepTime = ROUND(crsdeptime);
+-- Which year had the most number of total inbound and outbound flights? Which country is the most popular destination for flights?
 
-ALTER TABLE flights
-ALTER COLUMN CRSDepTime TYPE numeric; -- or real or double precision, depending on your needs
+SELECT "Year", COUNT("Year") 
+FROM flights
+GROUP BY 1
+ORDER BY 2 DESC;
 
-ALTER TABLE flights
-ALTER COLUMN crsarrtime TYPE integer;
+SELECT "Dest", COUNT("Dest") 
+FROM flights
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 10;
 
-
-
-COPY flights FROM '1987_flights.csv' WITH DELIMITER ',' CSV HEADER;
+-- most used flight numbers
+SELECT "FlightNum", COUNT("FlightNum") 
+FROM flights
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 5;
 
