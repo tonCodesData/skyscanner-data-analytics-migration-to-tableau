@@ -37,6 +37,8 @@ In brief, I extracted data from 10 different excel workbooks, contain flights da
 12. For ease of visualisation, I have included the twb file dashboards.twbx where there is no need to do the previous steps. I have created the visualisations with extracted data here. 
 
 
+## Tableau Charts
+
 ![most popular destinations](https://github.com/tonCodesData/skyscanner-data-analytics-migration-to-tableau/blob/master/tableau-reports-and-screenshots/most-popular-destinations.png)
 ![distance travelled by carriers](https://github.com/tonCodesData/skyscanner-data-analytics-migration-to-tableau/blob/master/tableau-reports-and-screenshots/distance-travelled-by-carriers.png)
 
